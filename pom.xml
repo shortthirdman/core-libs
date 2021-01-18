@@ -1,0 +1,142 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.shortthirdman.core</groupId>
+  <artifactId>core-libs</artifactId>
+  <packaging>jar</packaging>
+  <version>0.0.1</version>
+  <name>core-libs</name>
+  <url>http://maven.apache.org</url>
+  <description>Core Libs - a package of Java utility classes</description>
+  
+  <properties>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<java.version>1.8</java.version>
+	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
+	<maven.resources-plugin.version>3.0.1</maven.resources-plugin.version>
+	<maven.source-plugin.version>3.0.1</maven.source-plugin.version>
+	<maven.release-plugin.version>2.5.3</maven.release-plugin.version>
+	<maven.javadoc-plugin.version>2.10.4</maven.javadoc-plugin.version>
+	<maven.surefire-plugin.version>2.19.1</maven.surefire-plugin.version>
+	<maven.compiler-plugin.version>3.8.0</maven.compiler-plugin.version>
+  </properties>
+  
+  <licenses>
+      <license>
+          <name>Apache License 2.0</name>
+          <url>https://opensource.org/licenses/Apache-2.0</url>
+          <distribution>repo</distribution>
+      </license>
+  </licenses>
+  
+   <scm>
+      <!-- Should be format scm:git:git or scm:git:https -->
+      <connection>scm:git:https://github.com/shortthirdman/core-libs.git</connection>
+      <developerConnection>scm:git:ssh://github.com/shortthirdman/core-libs.git</developerConnection>
+      <url>https://github.com/shortthirdman/core-libs</url>
+      <tag>HEAD</tag>
+  </scm>
+  
+  <developers>
+    <developer>
+      <id>smohanty93</id>
+	  <name>Swetank Mohanty</name>
+      <email>swetank.mohanty@outlook.com</email>
+      <organization>ShortThirdMan USA Inc.</organization>
+      <organizationUrl>https://github.com/shortthirdman</organizationUrl>
+      <roles>
+        <role>Full Stack Software Developer</role>
+      </roles>
+      <timezone>GMT+05:30</timezone>
+    </developer>
+  </developers>
+
+  <dependencies>
+  </dependencies>
+  
+  <issueManagement>
+	<system>GitHub</system>
+	<url>https://github.com/shortthirdman/core-libs/issues</url>
+  </issueManagement>
+
+  <ciManagement>
+	<system>TravisCI</system>
+	<url>https://travis-ci.org/shortthirdman/core-libs</url>
+  </ciManagement>
+  
+  <build>
+	<finalName>${project.artifactId}-${project.version}</finalName>
+	<defaultGoal>clean verify source:jar javadoc:javadoc</defaultGoal>
+	<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler-plugin.version}</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.resources-plugin.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven.source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven.release-plugin.version}</version>
+				<configuration>
+					<localCheckout>true</localCheckout>
+					<pushChanges>false</pushChanges>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>${version.maven-scm-provider-gitexe}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven.javadoc-plugin.version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>${maven.compiler.source}</source>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</pluginManagement>
+  </build>
+</project>
