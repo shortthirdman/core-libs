@@ -31,13 +31,21 @@
       </license>
   </licenses>
   
-   <scm>
+  <scm>
       <!-- Should be format scm:git:git or scm:git:https -->
       <connection>scm:git:https://github.com/shortthirdman/core-libs.git</connection>
       <developerConnection>scm:git:ssh://github.com/shortthirdman/core-libs.git</developerConnection>
       <url>https://github.com/shortthirdman/core-libs</url>
       <tag>HEAD</tag>
   </scm>
+  
+  <distributionManagement>
+  	<repository>
+  		<id>github</id>
+  		<name>GitHub shortthirdman Apache Maven Packages</name>
+  		<url>https://maven.pkg.github.com/shortthirdman/core-libs</url>
+  	</repository>
+  </distributionManagement>
   
   <developers>
     <developer>
@@ -68,7 +76,6 @@
   
   <build>
 	<finalName>${project.artifactId}-${project.version}</finalName>
-	<defaultGoal>clean verify source:jar javadoc:javadoc</defaultGoal>
 	<pluginManagement>
 		<plugins>
 			<plugin>
@@ -86,6 +93,11 @@
 				<version>${maven.resources-plugin.version}</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<resources>
+						<resource>
+							<include>src/main/resources</include>
+						</resource>
+					</resources>
 				</configuration>
 			</plugin>
 			<plugin>

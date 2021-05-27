@@ -87,5 +87,36 @@ public final class FileIOUtils {
            destChannel.close();
 	    }
 	}
+	
+	/**
+     * @param dir
+     */
+    public static void removeDirectory(File dir) {
+    	if (dir.isDirectory()) {
+    		File[] files = dir.listFiles();
+    		if (files != null && files.length > 0) {
+    			for (File aFile : files) {
+    				removeDirectory(aFile);
+    			}
+    		}
+    		dir.delete();
+    	} else {
+    		dir.delete();
+    	}
+    }
+
+    /**
+     * @param dir
+     */
+    public static void cleanDirectory(File dir) {
+    	if (dir.isDirectory()) {
+    		File[] files = dir.listFiles();
+    		if (files != null && files.length > 0) {
+    			for (File aFile : files) {
+    				removeDirectory(aFile);
+    			}
+    		}
+    	}
+    }
 
 }
