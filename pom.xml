@@ -42,7 +42,6 @@
   </licenses>
   
   <scm>
-      <!-- Should be format scm:git:git or scm:git:https -->
       <connection>scm:git:https://github.com/shortthirdman/core-libs.git</connection>
       <developerConnection>scm:git:ssh://github.com/shortthirdman/core-libs.git</developerConnection>
       <url>https://github.com/shortthirdman/core-libs</url>
@@ -59,7 +58,7 @@
   
   <developers>
     <developer>
-      <id>smohanty93</id>
+      <id>shortthirdman</id>
 	  <name>Swetank Mohanty</name>
       <email>swetank.mohanty@outlook.com</email>
       <organization>ShortThirdMan</organization>
@@ -73,6 +72,11 @@
   </developers>
 
   <dependencies>
+	<dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>3.8.0</version>
+	</dependency>
 	<dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
