@@ -40,7 +40,7 @@
     <server>
       <id>github</id>
       <username>shortthirdman</username>
-      <password>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</password>
+      <password>${github.token}</password>
     </server>
   </servers>
 </settings>
