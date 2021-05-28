@@ -36,6 +36,6 @@ jobs:
       - name: Test JAR
         run: ./mvnw -B clean package source:jar --file pom.xml
       - name: Publish JAR
-        run: ./mvnw -B release:prepare release:perform
+        run: ./mvnw -B release:prepare release:perform --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
