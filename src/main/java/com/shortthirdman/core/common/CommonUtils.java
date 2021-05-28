@@ -92,7 +92,7 @@ public class CommonUtils {
 	 * 
 	 * @apiNote Replace the given regex with replacement string and convert it to
 	 *          lower case.
-	 * @param text
+	 * @param text the input string to convert
 	 * @return snake-case converted text string
 	 */
 	public static String camelToSnake(String text) {
@@ -105,7 +105,7 @@ public class CommonUtils {
 	/**
 	 * Checks if the list is valid - whether the list is empty or size is zero
 	 * 
-	 * @param list
+	 * @param list the list of object to be checked
 	 * @return boolean value
 	 */
 	public static Boolean isListValid(List<?> list) {
@@ -122,7 +122,7 @@ public class CommonUtils {
 
 	/**
 	 * @param textValue
-	 * @return
+	 * @return the trimmed value
 	 */
 	public static String trimTextValue(String textValue) {
 		String trimmedText;
@@ -154,23 +154,6 @@ public class CommonUtils {
 	/**
 	 * @param amount
 	 * @param precision
-	 * @param pattern
-	 * @param locale
-	 * @return
-	 */
-	public static String formatNumber(double amount, int precision, String pattern, Locale locale) {
-		NumberFormat nf = NumberFormat.getNumberInstance(locale);
-		DecimalFormat df = (DecimalFormat) nf;
-		df.setMinimumFractionDigits(precision);
-		df.setMaximumFractionDigits(precision);
-		df.setDecimalSeparatorAlwaysShown(true);
-		df.applyPattern(pattern);
-		return df.format(amount);
-	}
-
-	/**
-	 * @param amount
-	 * @param precision
 	 * @param locale
 	 * @return
 	 */
@@ -180,99 +163,6 @@ public class CommonUtils {
 		nf.setMaximumFractionDigits(precision);
 		return nf.format(amount);
 	}
-
-	/**
-	 * @param amount
-	 * @param precision
-	 * @param locale
-	 * @return
-	 */
-	public static String formatNumber(double amount, int precision, Locale locale) {
-		NumberFormat nf = NumberFormat.getNumberInstance(locale);
-		nf.setMinimumFractionDigits(precision);
-		nf.setMaximumFractionDigits(precision);
-		return nf.format(amount);
-	}
-	
-    /**
-     * Changes the format of the number by changing the string pattern.
-	 * If argument is float or double and contains tailing zeros, it removes them.
-	 * If argument is float or double then no change in return type.
-	 * 
-     * @param number
-     * @param pattern
-     * @param locale
-     * @return
-     */
-    public static String changeToDecimalFormat(Object number, String pattern, Locale locale) {
-        BigDecimal bdNumber = new BigDecimal(number.toString());
-        bdNumber = bdNumber.stripTrailingZeros();           //Returns a BigDecimal with any trailing zero's removed
-        if (pattern == null) {
-        	pattern = defaultPattern; //To apply formatting when the number of digits in input equals the pattern
-        }
-        DecimalFormat newFormat = new DecimalFormat(pattern, new DecimalFormatSymbols(locale));
-        return newFormat.format(bdNumber);
-    }
-
-    /**
-     * Removes commas from the number string
-     * @param number
-     * @return
-     */
-    public static double removeCommasFromNumber(Object number) {
-        try {
-            StringBuffer inputNo = new StringBuffer(number.toString());
-            if (inputNo.length() > 0) {
-                while (inputNo.indexOf(CommonConstants.COMMA) != -1) {
-                    inputNo.deleteCharAt(inputNo.indexOf(CommonConstants.COMMA));
-                }
-            } else {
-                return 0.0;
-            }
-            return Double.parseDouble(inputNo.toString());
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
-    }
-
-    /* Some times its required to have a fixed set of decimal places for a 
-     * number. We can set that by changing the precision number for a particular
-     * input BigDecimal Input String
-     */
-    public static String changeToRequiredDecimals(String bigDecimalString, int precision) {
-        String newFormattedString = null;
-        String afterDecimal = null;
-        if (bigDecimalString == null || bigDecimalString.length() == 0) {
-            return "0.0";
-        }
-        if (bigDecimalString.contains(CommonConstants.DOT_PERIOD)) {
-            afterDecimal = bigDecimalString.substring(bigDecimalString.indexOf(CommonConstants.DOT_PERIOD) + 1);
-            int length = Math.abs((afterDecimal.length() - precision));
-            if (afterDecimal.length() < precision) {
-                newFormattedString = bigDecimalString;
-                for (int i = 0; i < length; i++) {
-                    newFormattedString = newFormattedString + "0";
-                }
-            } else if (afterDecimal.length() > precision) {
-                newFormattedString = bigDecimalString.substring(0, bigDecimalString.length() - length);
-                if (precision == 0) {
-                    newFormattedString = newFormattedString.substring(0, newFormattedString.indexOf(CommonConstants.DOT_PERIOD));
-	            } else {
-	                newFormattedString = bigDecimalString;
-	            }
-
-	        } else {
-				if (precision > 0)
-					newFormattedString = bigDecimalString + CommonConstants.DOT_PERIOD;
-				else
-					newFormattedString = bigDecimalString;
-				for (int i = 0; i < precision; i++) {
-					newFormattedString = newFormattedString + "0";
-				}
-	        }
-        }
-        return newFormattedString;
-    }
     
     /**
      * Checks if the year is leap year or not
