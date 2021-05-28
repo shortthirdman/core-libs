@@ -3,7 +3,7 @@
   <groupId>com.shortthirdman.core</groupId>
   <artifactId>core-libs</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
   <name>core-libs</name>
   <url>http://maven.apache.org</url>
   <description>Core Libs - a package of Java utility classes</description>
