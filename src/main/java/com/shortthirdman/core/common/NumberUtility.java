@@ -44,7 +44,11 @@ public class NumberUtility {
         return newFormat.format(bdNumber);
     }
 
-    /* Method takes Object as parameter and removes commas from the parameter */
+    /**
+	 * Method takes Object as parameter and removes commas from the parameter
+	 * @param number
+	 * @return the converted number after removing commas
+	 */
     public static double removeCommasFromNumber(Object number) {
         try {
             StringBuffer inputNo = new StringBuffer(number.toString());
@@ -61,9 +65,13 @@ public class NumberUtility {
         }
     }
 
-    /* Some times its required to have a fixed set of decimal places for a 
+    /**
+	 * Some times its required to have a fixed set of decimal places for a 
      * number. We can set that by changing the precision number for a particular
      * input BigDecimal Input String
+	 * @param bigDecimalString the {@link BigDecimal} input string
+	 * @param precision the precision for the number format
+	 * @return the connverted number
      */
     public static String changeToRequiredDecimals(String bigDecimalString, int precision) {
         String newFormattedString = null;
@@ -102,21 +110,75 @@ public class NumberUtility {
         }
         return newFormattedString;
     }
+	
+	/**
+	 * @param amount
+	 * @param precision
+	 * @param pattern
+	 * @param locale
+	 * @return
+	 */
+	public static String formatNumber(double amount, int precision, String pattern, Locale locale) {
+		NumberFormat nf = NumberFormat.getNumberInstance(locale);
+		DecimalFormat df = (DecimalFormat) nf;
+		df.setMinimumFractionDigits(precision);
+		df.setMaximumFractionDigits(precision);
+		df.setDecimalSeparatorAlwaysShown(true);
+		df.applyPattern(pattern);
+		return df.format(amount);
+	}
+	
+	/**
+	 * @param amount
+	 * @param precision
+	 * @param locale
+	 * @return
+	 */
+	public static String formatNumber(double amount, int precision, Locale locale) {
+		NumberFormat nf = NumberFormat.getNumberInstance(locale);
+		nf.setMinimumFractionDigits(precision);
+		nf.setMaximumFractionDigits(precision);
+		return nf.format(amount);
+	}
+	
+    /**
+     * Changes the format of the number by changing the string pattern.
+	 * If argument is float or double and contains tailing zeros, it removes them.
+	 * If argument is float or double then no change in return type.
+	 * 
+     * @param number
+     * @param pattern
+     * @param locale
+     * @return
+     */
+    public static String changeToDecimalFormat(Object number, String pattern, Locale locale) {
+        BigDecimal bdNumber = new BigDecimal(number.toString());
+        bdNumber = bdNumber.stripTrailingZeros();           //Returns a BigDecimal with any trailing zero's removed
+        if (pattern == null) {
+        	pattern = defaultPattern; //To apply formatting when the number of digits in input equals the pattern
+        }
+        DecimalFormat newFormat = new DecimalFormat(pattern, new DecimalFormatSymbols(locale));
+        return newFormat.format(bdNumber);
+    }
 
-    public static void main(String args[]) {
-    	int intVar = 10;
-    	double doubleVar = 10.504000;
-    	float floatVar = 343534534348.5687654F;
-    	String commaString = "343,534,535,000.0";
-    	BigDecimal bdNumber = new BigDecimal("1234.8765");
-    	
-    	
-    	System.out.println(NumberUtility.changeToDecimalFormat(new Integer(intVar)));
-    	System.out.println(NumberUtility.changeToDecimalFormat(new Double(doubleVar)));
-    	System.out.println(NumberUtility.changeToDecimalFormat(new Float(floatVar)));
-    	
-    	System.out.println(NumberUtility.removeCommasFromNumber(commaString));
-    	
-    	System.out.println(NumberUtility.changeToRequiredDecimals(bdNumber.toString(), 8));
+    /**
+     * Removes commas from the number string
+     * @param number
+     * @return
+     */
+    public static double removeCommasFromNumber(Object number) {
+        try {
+            StringBuffer inputNo = new StringBuffer(number.toString());
+            if (inputNo.length() > 0) {
+                while (inputNo.indexOf(CommonConstants.COMMA) != -1) {
+                    inputNo.deleteCharAt(inputNo.indexOf(CommonConstants.COMMA));
+                }
+            } else {
+                return 0.0;
+            }
+            return Double.parseDouble(inputNo.toString());
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
     }
 }
