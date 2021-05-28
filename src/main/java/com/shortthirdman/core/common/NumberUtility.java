@@ -16,7 +16,7 @@
 package com.shortthirdman.core.common;
 
 import java.math.BigDecimal;
-
+import java.text.NumberFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -30,6 +30,8 @@ import java.util.Locale;
  */
 public class NumberUtility {
 	
+	private static String defaultPattern = "###,##0.0###########";
+	
     /**
      * Method takes Object as parameter and returns decimal number.
      * if argument is float or double and contains tailing zeros
@@ -42,27 +44,6 @@ public class NumberUtility {
         String pattern = "###,##0.0###########";		//To apply formatting when the number of digits in input equals the pattern
         DecimalFormat newFormat = new DecimalFormat(pattern, new DecimalFormatSymbols(Locale.US));
         return newFormat.format(bdNumber);
-    }
-
-    /**
-	 * Method takes Object as parameter and removes commas from the parameter
-	 * @param number
-	 * @return the converted number after removing commas
-	 */
-    public static double removeCommasFromNumber(Object number) {
-        try {
-            StringBuffer inputNo = new StringBuffer(number.toString());
-            if (inputNo.length() > 0) {
-                while (inputNo.indexOf(",") != -1) {
-                    inputNo.deleteCharAt(inputNo.indexOf(","));
-                }
-            } else {
-                return 0.0;
-            }
-            return Double.parseDouble(inputNo.toString());
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
     }
 
     /**
@@ -164,7 +145,7 @@ public class NumberUtility {
     /**
      * Removes commas from the number string
      * @param number
-     * @return
+     * @return the converted number after removing commas
      */
     public static double removeCommasFromNumber(Object number) {
         try {
