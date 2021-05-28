@@ -1,5 +1,7 @@
 # core-libs
 
+[![Java CI with Maven Release](https://github.com/shortthirdman/core-libs/actions/workflows/release.yml/badge.svg?branch=release&event=push)](https://github.com/shortthirdman/core-libs/actions/workflows/release.yml)
+
 A Java 8+ Core Library package for utility classes
 
 
