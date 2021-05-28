@@ -11,3 +11,5 @@ Please refer to this article for [publishing your artifacts to Maven Central](ht
 * [GitHub Actions and Maven releases](https://blog.frankel.ch/github-actions-maven-releases/)
 
 * [Publishing releases using Github, Bintray and maven-release-plugin](http://veithen.io/2013/05/26/github-bintray-maven-release-plugin.html)
+
+* [Maven Release to Nexus](https://www.baeldung.com/maven-release-nexus)

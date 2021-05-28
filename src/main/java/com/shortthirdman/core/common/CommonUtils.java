@@ -33,8 +33,6 @@ import java.util.stream.Collectors;
  * @version 0.0.1
  */
 public class CommonUtils {
-	
-	private static String defaultPattern = "###,##0.0###########";
 
 	/**
 	 * Converts a delimited text string into list of string
